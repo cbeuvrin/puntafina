@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Landing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main>
+        <!-- Hero Section (Video 1 + Elevator Frame + Inner Image) -->
+        <section class="hero-section">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="Videos/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="elevator-overlay">
+                <img src="Videos/imagen1.png" alt="Elevator Frame" class="elevator-frame">
+                <img src="Videos/imagen1.1.png" alt="Elevator Screen" class="elevator-screen">
+                <div id="floor-display" class="floor-display">Piso 1</div>
+            </div>
+
+        </section>
+
+        <!-- Second Video -->
+        <section class="video-section">
+            <!-- Preloaded Videos for Seamless Switching -->
+            <video id="video-1" class="floor-video active" autoplay muted loop playsinline>
+                <source src="videos pisos/VIDEO PITCH Ascensores BASE_Piso1sb.mp4" type="video/mp4">
+            </video>
+            <video id="video-2" class="floor-video" muted loop playsinline>
+                <source src="videos pisos/VIDEO PITCH Ascensores BASE_Piso2sb.mp4" type="video/mp4">
+            </video>
+            <!-- Floor 3 file missing, placeholder or skipped -->
+            <video id="video-3" class="floor-video" muted loop playsinline>
+                <!-- source src="videos pisos/VIDEO PITCH Ascensores BASE_Piso3sb.mp4" -->
+            </video>
+            <video id="video-4" class="floor-video" muted loop playsinline>
+                <source src="videos pisos/VIDEO PITCH Ascensores BASE_Piso4sb.mp4" type="video/mp4">
+            </video>
+            <video id="video-5" class="floor-video" muted loop playsinline>
+                <source src="videos pisos/VIDEO PITCH Ascensores BASE_Piso5sb.mp4" type="video/mp4">
+            </video>
+            <video id="video-6" class="floor-video" muted loop playsinline>
+                <source src="videos pisos/VIDEO PITCH Ascensores BASE_Piso6sb.mp4" type="video/mp4">
+            </video>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <img src="Videos/botonera fondo.webp" alt="Control Panel Background" class="panel-bg">
+                <div class="panel-buttons">
+                    <button class="elevator-btn" data-floor="6">6</button>
+                    <button class="elevator-btn" data-floor="5">5</button>
+                    <button class="elevator-btn" data-floor="4">4</button>
+                    <button class="elevator-btn" data-floor="3">3</button>
+                    <button class="elevator-btn" data-floor="2">2</button>
+                    <button class="elevator-btn active" data-floor="1">1</button>
+                </div>
+            </div>
+        </section>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
