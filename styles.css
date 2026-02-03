@@ -97,8 +97,8 @@ body {
     /* Move slightly right to clear the wood */
     top: 50%;
     transform: translateY(-50%);
-    width: 80px;
-    /* Guessing width */
+    width: 6vw;
+    /* Responsive width */
     height: auto;
     z-index: 20;
     display: flex;
@@ -127,17 +127,17 @@ body {
 }
 
 .elevator-btn {
-    width: 25px;
-    /* Smaller size */
-    height: 25px;
+    width: 1.8vw;
+    /* Responsive button size */
+    height: 1.8vw;
     border-radius: 50%;
     background-color: #333;
     /* Dark gray */
     color: #fff;
     border: none;
     font-weight: bold;
-    font-size: 0.8rem;
-    /* Smaller font */
+    font-size: 0.9vw;
+    /* Responsive font size */
     cursor: pointer;
     display: flex;
     justify-content: center;
