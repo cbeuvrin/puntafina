@@ -175,7 +175,7 @@ body {
     margin-top: 80px;
     /* Adjusted to 80px (up 20px from 100px) */
     z-index: 10;
-    background-image: url('ascensor/fondo-inferior ascensores-gradiente.png');
+    background-image: url('ascensor/fondo-inferior-gradiente.png');
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
