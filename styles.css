@@ -4,10 +4,114 @@
     box-sizing: border-box;
 }
 
+main {
+    max-width: 1920px;
+    margin: 0 auto;
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+}
+
 body {
     background-color: #000;
     /* Assuming black background from context */
     overflow-x: hidden;
+}
+
+.datetime-display {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+
+.cities-display {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    z-index: 9999;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+
+/* S2: "Amantes de las" */
+.amantes-text {
+    position: absolute;
+    top: 46px;
+    left: 77px;
+    z-index: 9998;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 30pt;
+    color: #fff;
+    letter-spacing: -0.08em;
+    transform: scaleX(1.15);
+    transform-origin: left center;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* S4: Textos descriptivos */
+/* S4: Textos descriptivos */
+.overlay-texts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.text-sonamos {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%) scaleX(1.09);
+    transform-origin: center center;
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 0.1s ease-out, filter 0.1s ease-out;
+    width: 590px;
+    max-width: 90%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12pt;
+    color: #fff;
+    letter-spacing: -0.04em;
+    text-align: justify;
+    text-align-last: justify;
+    line-height: 1.4;
+}
+
+.text-aca-abajo {
+    position: absolute;
+    bottom: 420px;
+    right: 5%;
+    width: 280px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 8pt;
+    color: #fff;
+    letter-spacing: -0.04em;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.text-aca-abajo strong {
+    font-style: italic;
 }
 
 .hero-section {
@@ -61,6 +165,66 @@ body {
     top: 58%;
     /* Move down to align with silver bezel */
     /* Center centering is handled by flex on parent, but let's be explicit if needed */
+}
+
+.base-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin-top: 80px;
+    /* Adjusted to 80px (up 20px from 100px) */
+    z-index: 10;
+    background-image: url('ascensor/fondo-inferior ascensores-gradiente.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+
+.elevator-base-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.base-content-wrapper {
+    position: absolute;
+    top: 50%;
+    /* Center vertically in the section */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1650px;
+    /* Constrain to video width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+.video-container {
+    width: 100%;
+    aspect-ratio: 1650 / 450;
+    background-color: #000;
+    /* Placeholder color */
+    margin-bottom: 490px;
+    /* Increased to 90px (20 + 70) to move video up */
+    max-width: 90vw;
+    /* Ensure it doesn't overflow small screens */
+}
+
+.base-text-overlay {
+    position: absolute;
+    /* Taken out of flow to not affect video position */
+    bottom: 400px;
+    /* Positioned within the 420px margin gap */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 600px;
+    height: auto;
+    pointer-events: none;
 }
 
 .floor-display {
