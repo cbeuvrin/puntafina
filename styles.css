@@ -179,6 +179,8 @@ body {
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
+    padding-bottom: 150px;
+    /* Extend background to cover logos */
 }
 
 .elevator-base-img {
@@ -208,7 +210,7 @@ body {
     aspect-ratio: 1650 / 450;
     background-color: #000;
     /* Placeholder color */
-    margin-bottom: 490px;
+    margin-bottom: 600px;
     /* Increased to 90px (20 + 70) to move video up */
     max-width: 90vw;
     /* Ensure it doesn't overflow small screens */
@@ -217,7 +219,7 @@ body {
 .base-text-overlay {
     position: absolute;
     /* Taken out of flow to not affect video position */
-    bottom: 400px;
+    bottom: 530px;
     /* Positioned within the 420px margin gap */
     left: 50%;
     transform: translateX(-50%);
@@ -227,9 +229,30 @@ body {
     pointer-events: none;
 }
 
+/* Footer Logos Styles within Base Section */
+.footer-logos-container {
+    position: absolute;
+    bottom: 10px;
+    /* Moved lower (was 30px) */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 30;
+}
+
+.footer-logos {
+    width: 20%;
+    /* Relative width for small screens */
+    max-width: 350px;
+    /* Fixed max width to prevent overlap on large screens */
+    height: auto;
+    display: inline-block;
+}
+
 .floor-display {
     position: absolute;
-    top: 58%;
+    top: 2075px;
+    /* Manually adjusted to align with blue background */
     /* Align with top of screen image */
     left: 50%;
     transform: translateX(-50%);
@@ -245,7 +268,27 @@ body {
     font-size: 1.5vw;
     font-weight: bold;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 0, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 0, 255, 0.5);
     pointer-events: none;
+}
+
+/* Footer Styles */
+.main-footer {
+    background-color: #000;
+    text-align: center;
+    padding: 50px 20px;
+    /* Add some breathing room */
+    position: relative;
+    z-index: 20;
+}
+
+.footer-logos {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.floor-display-content {
     overflow: hidden;
     /* Mask the text outside the box */
     display: flex;
