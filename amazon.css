@@ -1,0 +1,1568 @@
+/* Amazon MX Catalog Styles - One Pager Version */
+
+body.amazon-catalog-body {
+    background-color: #000;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #fff;
+    margin: 0;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    overflow-y: auto;
+    /* Allow vertical scroll */
+    scroll-behavior: smooth;
+}
+
+.amazon-catalog {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* --- Background Groups --- */
+.background-group {
+    position: relative;
+    width: 100%;
+    /* Let content define height */
+    background-size: cover;
+    background-position: center top;
+}
+
+/* Specific for Fondo 1: ensure full 1920x7397px image is visible */
+.bg-fondo-1 {
+    background-size: 100% auto;
+    /* Force width to fit, height scales naturally */
+    min-height: 385vw;
+    /* 7397 / 1920 * 100 = ~385.26vw */
+}
+
+/* --- COYOTE VIP SECTION SPECIFIC --- */
+.coyote-vip-section {
+    flex-direction: column;
+    /* Stack logo and image */
+    justify-content: center;
+    /* Center vertically */
+    align-items: center;
+    /* Center horizontally */
+    padding: 0 0 50px 0 !important;
+    /* Override default padding strongly, but add bottom space */
+    height: auto !important;
+    /* Force expansion over .product-section 100vh */
+    min-height: 100vh;
+    width: 100%;
+}
+
+.coyote-content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center;
+    padding-top: 50px;
+    margin: 0 auto;
+    /* Ensure block centering if needed */
+}
+
+.product-logo-premium {
+    height: 30px;
+    /* "Del mismo tamaño" (similar to menu logos) */
+    width: auto;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    /* Optional: shift logo slightly too if needed, but image is the main visual weight */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+}
+
+/* Wrapper for Image + Card to handle layering and offset together */
+/* Wrapper for Image + Card to handle layering and offset together */
+.coyote-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1210px;
+    /* Shift left to align the inner "poster box" with the section below */
+    transform: translateX(-79px);
+    display: inline-block;
+}
+
+.coyote-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    /* Removed individual margin-left/left from here */
+}
+
+/* Lock rendered height to original pixel dimensions — swap-proof */
+.coyote-parte1-img {
+    aspect-ratio: 1562 / 5367;
+}
+
+.coyote-parte2-img {
+    aspect-ratio: 1562 / 6212;
+}
+
+/* --- Glassmorphism Card --- */
+.glass-info-card {
+    background: rgba(81, 81, 81, 0.2);
+    /* Reference color */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 10px 30px;
+    /* Reduced padding for 70px height target */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Align vertically centered */
+    gap: 20px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Absolute positioning inside wrapper */
+    position: absolute;
+    top: 660px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    /* Flexible width */
+    max-width: 863px;
+    /* Target width */
+    height: auto;
+    min-height: 70px;
+    /* Target height */
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Info Card Positioning */
+/* Specific Info Card alignment for Coyote Section */
+.coyote-content-container .glass-info-card,
+.coyote-content-container .glass-synopsis-card,
+.coyote-content-container .glass-patricia-card,
+.coyote-content-container .glass-juan-card,
+.coyote-content-container .glass-anthony-card,
+.coyote-content-container .glass-references-card {
+    margin-left: 76px;
+    /* Shifted 116px right (Total) from centered position */
+}
+
+.dc-info {
+    position: absolute;
+    top: 670px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    margin: 0;
+}
+
+/* Synopsis Card Positioning */
+.dc-synopsis {
+    position: absolute;
+    top: 7600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    margin: 0;
+}
+
+/* Character Cards Positioning */
+.dc-raul {
+    top: 3500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+.dc-marcela {
+    top: 6300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+.dc-javier {
+    top: 8500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+
+
+.glass-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    /* Tighter spacing */
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center;
+    width: 100%;
+}
+
+.glass-label {
+    font-size: 0.65rem;
+    /* Reduced size for "subtitle" feel */
+    color: #ddd;
+    font-weight: 400;
+    /* Montserrat Normal */
+    /* text-transform: uppercase; Removed to allow Mixed Case as requested */
+    letter-spacing: 0.5px;
+    text-align: center !important;
+    display: block;
+    width: 100%;
+}
+
+.glass-value {
+    font-size: 0.9rem;
+    /* Slightly reduced main text */
+    font-weight: 700;
+    /* Montserrat Bold */
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-align: center !important;
+    display: block;
+    width: 100%;
+}
+
+/* --- Synopsis Glass Card --- */
+.glass-synopsis-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: 760px;
+    /* Below the info card (660px + 70px + 30px gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-synopsis-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.glass-synopsis-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #eee;
+    text-align: justify;
+}
+
+
+
+/* --- References Glass Card --- */
+.glass-references-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: 1350px;
+    /* Positioned well below the synopsis (needs manual tuning based on synopsis height) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-references-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.glass-references-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.reference-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+transform: scale(1.05);
+}
+
+/* --- Character Bio Glass Card --- */
+.glass-character-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: 2904px;
+    /* 2130px + 394px + 380px (Moved up 20px) */
+    left: 50%;
+    transform: translateX(-40%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-character-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.glass-character-subtitle {
+    font-size: 1.0rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #ddd;
+}
+
+.glass-character-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #eee;
+}
+
+.glass-character-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- HERO SECTION (Menu) --- */
+.hero-section-menu {
+    position: relative;
+    /* Normal flow */
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    flex-shrink: 0;
+    z-index: 10;
+    /* No background here, it uses the group's background */
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    z-index: 0;
+}
+
+/* --- Header --- */
+.catalog-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    z-index: 1;
+}
+
+.header-bg {
+    display: none;
+    /* Background is on .hero-background now */
+}
+
+.header-text-img {
+    width: 100%;
+    /* Full width, stuck to top */
+    height: auto;
+    object-fit: contain;
+    margin-top: 0;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Menu Intro --- */
+.menu-intro {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    margin: 30px 0 20px 0;
+    padding-left: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.menu-title-img {
+    height: 120px;
+    /* Increased further to 120px */
+    width: auto;
+    display: block;
+    margin-right: 0;
+    /* No text next to it anymore */
+    flex-shrink: 0;
+}
+
+/* Removed menu-instruction styles */
+
+/* Removed menu-instruction styles */
+.menu-instruction {
+    display: none;
+}
+
+/* --- 3-Row Slider Container --- */
+.slider-menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    /* Gap controlled by row-header margin */
+    padding: 10px 0 40px 0;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* --- Row Logos --- */
+.row-header {
+    padding-left: 50px;
+    margin-top: 30px;
+    /* Space above each logo */
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.row-logo {
+    height: 20px;
+    /* Reduced from 28px */
+    width: auto;
+    display: block;
+    opacity: 0.9;
+}
+
+.slider-row {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 180px;
+    display: flex;
+    align-items: center;
+}
+
+
+.slider-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.slider-item {
+    width: 320px;
+    height: 100%;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-item:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    outline: 2px solid #fff;
+}
+
+/* Animations */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.row-1 .slider-track {
+    animation-name: scrollLeft;
+    animation-duration: 40s;
+}
+
+.row-2 .slider-track {
+    animation-name: scrollRight;
+    animation-duration: 45s;
+}
+
+.row-3 .slider-track {
+    animation-name: scrollLeft;
+    animation-duration: 50s;
+}
+
+.slider-track:hover {
+    animation-play-state: paused;
+}
+
+
+/* --- Scroll Indicator --- */
+.scroll-indicator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    z-index: 20;
+    animation: bounce 2s infinite;
+}
+
+.arrow-down {
+    width: 15px;
+    height: 15px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    margin-top: 5px;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+
+/* --- PRODUCT SECTIONS --- */
+/* --- PRODUCT SECTIONS --- */
+.product-section {
+    position: relative;
+    /* Normal flow, no sticky */
+    width: 100%;
+    min-height: 380vw;
+    /* Aspect ratio ~3.8 to show full 7000px+ images */
+    height: auto;
+    flex-shrink: 0;
+    background-size: 100% auto;
+    /* Full width, natural height */
+    background-repeat: repeat-y;
+    background-position: top center;
+    /* Start from top */
+    display: flex;
+    align-items: flex-start;
+    /* Align content to top */
+    justify-content: flex-start;
+    padding-left: 10%;
+    padding-top: 20px;
+    /* Add padding to push content down a bit */
+    /* No shadow needed for normal flow */
+}
+
+/* Individual products in groups don't need their own bg */
+.bg-fondo-1 .product-section {
+    background-image: none !important;
+}
+
+/* Stacking Order - Reset */
+#product-1,
+#product-2,
+#product-3,
+#product-4,
+#product-5,
+#product-6,
+#product-7,
+#product-8 {
+    z-index: auto;
+}
+
+.product-content {
+    max-width: 600px;
+    z-index: 10;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.section-title {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.section-desc {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* Hide modal since we use sections now */
+.product-modal {
+    display: none !important;
+}
+
+/* Adjustments for smoothness */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- References Glass Card --- */
+.glass-references-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: 2130px;
+    /* Positioned below the synopsis (760px + ~1330px height + 40px gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-references-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.glass-references-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.reference-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.reference-item img:hover {
+    transform: scale(1.05);
+}
+
+/* --- Character Bio Glass Card --- */
+.glass-character-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 30px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: auto;
+    bottom: 5080px;
+    left: calc(4% + 220px);
+    /* Shifted right 220px total */
+    width: 380px;
+    /* Vertical card width */
+    max-width: none;
+    height: auto;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    /* Reset alignment for card content */
+    transform: none;
+    /* Remove centering transform */
+}
+
+.glass-character-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.glass-character-subtitle {
+    font-size: 1.0rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #ddd;
+}
+
+.glass-character-text p {
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #eee;
+}
+
+.glass-character-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Patricia Flores Glass Card --- */
+.glass-patricia-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: auto;
+    bottom: 3900px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-patricia-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.glass-patricia-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #eee;
+}
+
+.glass-patricia-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Daniela Meza Glass Card --- */
+.glass-daniela-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 30px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: auto;
+    bottom: 3010px;
+    left: calc(4% + 220px);
+    /* Aligned inside poster like Alejandro */
+    width: 380px;
+    /* Vertical sidebar style */
+    max-width: none;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: left;
+}
+
+.glass-daniela-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.glass-daniela-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #eee;
+}
+
+.glass-daniela-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Juan Meza Glass Card --- */
+.glass-juan-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: auto;
+    bottom: 1700px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    /* Horizontal/Wide style like Patricia */
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-juan-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.glass-juan-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #eee;
+}
+
+.glass-juan-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Anthony Pinto Glass Card --- */
+.glass-anthony-card {
+    background: rgba(81, 81, 81, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Positioning */
+    position: absolute;
+    top: auto;
+    bottom: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    /* Horizontal/Wide style */
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-anthony-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.glass-anthony-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #eee;
+}
+
+/* --- Doble Cara References Override --- */
+.doble-cara-wrapper .dc-references {
+    top: 3500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+.glass-anthony-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Doble Cara Raúl Bio Override --- */
+.doble-cara-wrapper .dc-raul-bio {
+    position: absolute;
+    top: 5400px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+/* --- Doble Cara Marcela Bio Override --- */
+.doble-cara-wrapper .dc-marcela-bio {
+    position: absolute;
+    top: 6900px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+/* --- Doble Cara Javier Bio Override --- */
+.doble-cara-wrapper .dc-javier-bio {
+    position: absolute;
+    top: 8500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+}
+
+/* --- Tin Tan Layout --- */
+.tin-tan-wrapper .tt-info {
+    position: absolute;
+    top: 670px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.tin-tan-wrapper .tt-synopsis {
+    position: absolute;
+    top: 820px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.tin-tan-wrapper .tt-references {
+    position: absolute;
+    top: 3100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* Force same size for Tin Tan references */
+/* Force same size for Tin Tan references */
+.tin-tan-wrapper .tt-references .reference-item img {
+    width: 100%;
+    height: 250px;
+    /* Fixed height for uniformity */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.tin-tan-wrapper .tt-german {
+    position: absolute;
+    top: 4280px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tin-tan-wrapper .tt-rosalia {
+    position: absolute;
+    top: 5600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tin-tan-wrapper .tt-marcelo {
+    position: absolute;
+    top: 7150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* --- Tepito Witon Layout --- */
+.tepito-wrapper .tw-info {
+    position: absolute;
+    top: 670px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.tepito-wrapper .tw-synopsis {
+    position: absolute;
+    top: 770px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.tepito-wrapper .tw-references {
+    position: absolute;
+    top: 2500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tepito-wrapper .tw-wendy {
+    position: absolute;
+    top: 3700px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tepito-wrapper .tw-fabrizio {
+    position: absolute;
+    top: 4800px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tepito-wrapper .tw-diana {
+    position: absolute;
+    top: 6060px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tepito-wrapper .tw-tenoch {
+    position: absolute;
+    top: 7250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* Force same size for Tepito Witon references */
+.tepito-wrapper .tw-references .reference-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* --- Fiesta Finn Layout --- */
+.fiesta-wrapper .ff-info {
+    position: absolute;
+    top: 990px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.fiesta-wrapper .ff-synopsis {
+    position: absolute;
+    top: 1090px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.fiesta-wrapper .ff-references {
+    position: absolute;
+    top: 3500px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* Force same size for Fiesta Finn references */
+.fiesta-wrapper .ff-references .reference-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* --- Diario de un Canalla Layout --- */
+.diario-wrapper .duc-info {
+    position: absolute;
+    top: 880px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.diario-wrapper .duc-synopsis {
+    position: absolute;
+    top: 980px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.diario-wrapper .duc-references {
+    position: absolute;
+    top: 3250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.diario-wrapper .duc-references .reference-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.diario-wrapper .duc-leonardo {
+    position: absolute;
+    top: 5000px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.diario-wrapper .duc-veronica {
+    position: absolute;
+    top: 6300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.diario-wrapper .duc-danilo {
+    position: absolute;
+    top: 7450px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* Dark Glassmorphism Override for Diario de un Canalla */
+.diario-wrapper .glass-info-card,
+.diario-wrapper .glass-synopsis-card,
+.diario-wrapper .glass-references-card {
+    background: rgba(0, 0, 0, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* --- Volverte a Ver Layout --- */
+.vav-wrapper .vav-info {
+    position: absolute;
+    top: 750px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.vav-wrapper .vav-synopsis {
+    position: absolute;
+    top: 850px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.vav-wrapper .vav-references {
+    position: absolute;
+    top: 2450px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.vav-wrapper .vav-references .reference-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.vav-wrapper .vav-natalia {
+    position: absolute;
+    top: 3700px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.vav-wrapper .vav-francisco {
+    position: absolute;
+    top: 4850px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.vav-wrapper .vav-esteban {
+    position: absolute;
+    top: 5990px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* --- Tu Mejor Error Layout --- */
+.tme-wrapper .tme-info {
+    position: absolute;
+    top: 970px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.tme-wrapper .tme-synopsis {
+    position: absolute;
+    top: 1070px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    z-index: 10;
+}
+
+.tme-wrapper .tme-references {
+    position: absolute;
+    top: 2420px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 863px;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tme-wrapper .tme-aitana {
+    position: absolute;
+    top: 4400px;
+    left: 5%;
+    transform: none;
+    width: 380px;
+    max-width: none;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tme-wrapper .tme-javier {
+    position: absolute;
+    top: 5550px;
+    right: 5%;
+    left: auto;
+    transform: none;
+    width: 380px;
+    max-width: none;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tme-wrapper .tme-manuel {
+    position: absolute;
+    top: 7180px !important;
+    left: 5%;
+    transform: none;
+    width: 380px;
+    max-width: none;
+    bottom: auto;
+    z-index: 10;
+}
+
+.tme-wrapper .tme-pilar {
+    position: absolute;
+    top: 8730px;
+    right: 5%;
+    left: auto;
+    transform: none;
+    width: 380px;
+    max-width: none;
+    bottom: auto;
+    z-index: 10;
+}
+
+/* ═══ Lightbox Overlay ═══ */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+.lightbox-img {
+    max-width: 85vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+    animation: lightbox-in 0.3s ease;
+}
+
+@keyframes lightbox-in {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 48px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+    z-index: 10000;
+}
+
+.lightbox-close:hover {
+    color: #ff4444;
+}
+
+.reference-item img {
+    cursor: pointer;
+}
+
+/* --- SCROLL TO TOP BUTTON --- */
+.glass-scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px !important;
+    left: auto !important;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.glass-scroll-top:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
