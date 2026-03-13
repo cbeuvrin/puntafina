@@ -283,13 +283,20 @@ body {
     /* Move slightly right to clear the wood */
     top: 50%;
     transform: translateY(-50%);
-    width: 6.5vw; /* Slightly wider */
-    height: 22vw; /* Increased height from 18vw to 22vw */
+    width: 6.5vw;
+    height: 18vw; /* Default height for 6 buttons */
     z-index: 20;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: height 0.3s ease;
 }
+
+/* Modifier for 9 buttons in Amazon Col */
+.control-panel.nine-floors {
+    height: 22vw;
+}
+
 
 .panel-bg {
     width: 100%;
@@ -309,8 +316,12 @@ body {
     justify-content: space-evenly;
     /* Distribute buttons */
     align-items: center;
+    padding: 20% 0; /* Default padding for 6 buttons */
+}
+
+/* Modifier for 9 buttons spacing */
+.nine-floors .panel-buttons {
     padding: 15% 0;
-    /* Reduced padding to let buttons use more of the increased height */
 }
 
 .elevator-btn {
