@@ -102,7 +102,8 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 0; /* Remove negative margin used for gap filling */
+    margin-bottom: -108px;
+    /* Pull next section up to fill gap */
 }
 
 .hero-video {
@@ -155,20 +156,21 @@ body {
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    margin-top: 0; /* Align directly with above section */
+    margin-top: 80px;
+    /* Adjusted to 80px (up 20px from 100px) */
     z-index: 10;
     background-image: url('ascensor/fondo-inferior-gradiente.png');
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
-    padding-bottom: 300px;
+    padding-bottom: 300px; /* Increased to accommodate larger content */
+    /* Extend background to cover logos */
 }
 
 .elevator-base-img {
     width: 100%;
     height: auto;
     display: block;
-    margin-top: -1px; /* Slight overlap to prevent seam */
 }
 
 .base-content-wrapper {
@@ -352,11 +354,13 @@ body {
 
 .video-section {
     position: relative;
+    /* Anchor for control panel */
     width: 100%;
     margin: 0;
     line-height: 0;
-    aspect-ratio: 16 / 9; /* Fixed aspect ratio to keep content from stretching */
-    background: #000;
+    /* Remove potential gap due to inline-block/text alignment */
+    min-height: 100vh;
+    /* Ensure container has height since children are absolute */
 }
 
 /* Updated to support multiple stacked videos */
