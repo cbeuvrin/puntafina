@@ -305,7 +305,7 @@ body {
 
 /* Modifier for 11 buttons in Amazon MX */
 .control-panel.eleven-floors {
-    height: 26vw;
+    height: 29vw;
 }
 
 
@@ -342,7 +342,7 @@ body {
 
 /* Modifier for 11 buttons spacing */
 .eleven-floors .panel-buttons {
-    padding: 10% 0;
+    padding: 14% 0;
 }
 
 .elevator-btn {
