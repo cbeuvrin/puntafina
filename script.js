@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
         6: document.getElementById('video-6'),
         7: document.getElementById('video-7'),
         8: document.getElementById('video-8'),
-        9: document.getElementById('video-9')
+        9: document.getElementById('video-9'),
+        10: document.getElementById('video-10'),
+        11: document.getElementById('video-11')
     };
 
     const buttons = document.querySelectorAll('.elevator-btn');

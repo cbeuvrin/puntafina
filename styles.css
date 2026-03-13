@@ -298,6 +298,16 @@ body {
     height: 22vw;
 }
 
+/* Modifier for 10 buttons in Amazon MX */
+.control-panel.ten-floors {
+    height: 24vw;
+}
+
+/* Modifier for 11 buttons in Amazon MX */
+.control-panel.eleven-floors {
+    height: 26vw;
+}
+
 
 .panel-bg {
     width: 100%;
@@ -323,6 +333,16 @@ body {
 /* Modifier for 9 buttons spacing */
 .nine-floors .panel-buttons {
     padding: 15% 0;
+}
+
+/* Modifier for 10 buttons spacing */
+.ten-floors .panel-buttons {
+    padding: 12% 0;
+}
+
+/* Modifier for 11 buttons spacing */
+.eleven-floors .panel-buttons {
+    padding: 10% 0;
 }
 
 .elevator-btn {
