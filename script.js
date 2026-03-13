@@ -77,7 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
         3: document.getElementById('video-3'),
         4: document.getElementById('video-4'),
         5: document.getElementById('video-5'),
-        6: document.getElementById('video-6')
+        6: document.getElementById('video-6'),
+        7: document.getElementById('video-7'),
+        8: document.getElementById('video-8'),
+        9: document.getElementById('video-9')
     };
 
     const buttons = document.querySelectorAll('.elevator-btn');

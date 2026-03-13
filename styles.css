@@ -54,7 +54,7 @@ body {
     z-index: 9998;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
-    font-size: 30pt;
+    font-size: 48pt;
     color: #fff;
     letter-spacing: -0.08em;
     transform: scaleX(1.15);
@@ -77,7 +77,7 @@ body {
 
 .text-sonamos {
     position: absolute;
-    top: 58%;
+    top: calc(58% - 60px);
     left: 50%;
     transform: translateX(-50%) scaleX(1.09);
     transform-origin: center center;
@@ -88,7 +88,7 @@ body {
     max-width: 90%;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 21pt;
     color: #fff;
     letter-spacing: -0.04em;
     text-align: justify;
@@ -96,23 +96,7 @@ body {
     line-height: 1.4;
 }
 
-.text-aca-abajo {
-    position: absolute;
-    bottom: 420px;
-    right: 5%;
-    width: 280px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    font-size: 8pt;
-    color: #fff;
-    letter-spacing: -0.04em;
-    text-align: left;
-    line-height: 1.4;
-}
 
-.text-aca-abajo strong {
-    font-style: italic;
-}
 
 .hero-section {
     position: relative;
@@ -179,7 +163,7 @@ body {
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
-    padding-bottom: 150px;
+    padding-bottom: 300px; /* Increased to accommodate larger content */
     /* Extend background to cover logos */
 }
 
@@ -191,8 +175,7 @@ body {
 
 .base-content-wrapper {
     position: absolute;
-    top: 50%;
-    /* Center vertically in the section */
+    top: calc(45% - 270px); /* Moved 270px further up to reveal background text */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -210,23 +193,19 @@ body {
     aspect-ratio: 1650 / 450;
     background-color: #000;
     /* Placeholder color */
-    margin-bottom: 600px;
-    /* Increased to 90px (20 + 70) to move video up */
+    margin-bottom: 20px; /* Reduced from 600px, as it's now in flow */
     max-width: 90vw;
     /* Ensure it doesn't overflow small screens */
 }
 
 .base-text-overlay {
-    position: absolute;
-    /* Taken out of flow to not affect video position */
-    bottom: 530px;
-    /* Positioned within the 420px margin gap */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    max-width: 600px;
+    position: relative; /* Now in flow */
+    width: 90%; /* 50% larger than previous 60% */
+    max-width: 900px; /* 50% larger than previous 600px */
+    margin-bottom: 20px; /* Space between text and video, reduced by another 15px */
     height: auto;
     pointer-events: none;
+    display: block;
 }
 
 /* Footer Logos Styles within Base Section */
@@ -304,9 +283,8 @@ body {
     /* Move slightly right to clear the wood */
     top: 50%;
     transform: translateY(-50%);
-    width: 6vw;
-    /* Responsive width */
-    height: auto;
+    width: 6.5vw; /* Slightly wider */
+    height: 22vw; /* Increased height from 18vw to 22vw */
     z-index: 20;
     display: flex;
     justify-content: center;
@@ -315,6 +293,8 @@ body {
 
 .panel-bg {
     width: 100%;
+    height: 100%; /* Stretch background vertically */
+    object-fit: fill; /* Force stretch */
     display: block;
 }
 
@@ -329,14 +309,13 @@ body {
     justify-content: space-evenly;
     /* Distribute buttons */
     align-items: center;
-    padding: 20% 0;
-    /* Padding from top/bottom of panel bg */
+    padding: 15% 0;
+    /* Reduced padding to let buttons use more of the increased height */
 }
 
 .elevator-btn {
-    width: 1.8vw;
-    /* Responsive button size */
-    height: 1.8vw;
+    width: 1.5vw; /* Slightly smaller to fit more in the vertical space */
+    height: 1.5vw;
     border-radius: 50%;
     background-color: #333;
     /* Dark gray */

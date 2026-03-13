@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initCards() {
         cards = Array.from(document.querySelectorAll(SELECTORS));
         cards.forEach((card, i) => {
-            card._pSpeed = (i % 2 === 0) ? 0.12 : 0.18;
+            card._pSpeed = (i % 2 === 0) ? 0.05 : 0.08;
             const computed = window.getComputedStyle(card).transform;
             card._baseTransform = (computed && computed !== 'none') ? computed : '';
         });
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // ─── SCROLL TO TOP ───
-(function() {
+(function () {
     const btn = document.getElementById('scrollTopBtn');
     if (!btn) return;
 
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    window.scrollToTop = function() {
+    window.scrollToTop = function () {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
