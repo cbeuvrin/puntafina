@@ -155,236 +155,84 @@ body {
 .base-section {
     position: relative;
     width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    margin-top: 80px;
-    /* Adjusted to 80px (up 20px from 100px) */
+    overflow: visible;
+    margin-top: 250px;
+    margin-bottom: 300px; /* Added padding for logos */
     z-index: 10;
-    background-image: url('ascensor/fondo-inferior-gradiente.png');
-    background-size: cover;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    padding-bottom: 300px; /* Increased to accommodate larger content */
-    /* Extend background to cover logos */
-}
-
-.elevator-base-img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.base-content-wrapper {
-    position: absolute;
-    top: calc(45% - 270px); /* Moved 270px further up to reveal background text */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 1650px;
-    /* Constrain to video width */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-}
-
-.video-container {
-    width: 100%;
-    aspect-ratio: 1650 / 450;
     background-color: #000;
-    /* Placeholder color */
-    margin-bottom: 20px; /* Reduced from 600px, as it's now in flow */
-    max-width: 90vw;
-    /* Ensure it doesn't overflow small screens */
 }
 
-.base-text-overlay {
-    position: relative; /* Now in flow */
-    width: 90%; /* 50% larger than previous 60% */
-    max-width: 900px; /* 50% larger than previous 600px */
-    margin-bottom: 20px; /* Space between text and video, reduced by another 15px */
-    height: auto;
-    pointer-events: none;
-    display: block;
-}
-
-/* Footer Logos Styles within Base Section */
-.footer-logos-container {
+/* Base Section Gradient Blending - Fades UP from the section into black */
+.base-section::before {
+    content: "";
     position: absolute;
-    bottom: 10px;
-    /* Moved lower (was 30px) */
+    top: -250px;
+    /* Start higher above the section */
     left: 0;
     width: 100%;
-    text-align: center;
-    z-index: 30;
+    height: 250px;
+    background: linear-gradient(to top, #000, transparent);
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Background Mockup (GLASS DOWN) */
+.base-section::after {
+    content: "";
+    display: block;
+    width: 100%;
+    padding-bottom: 66.7%;
+    background-image: url('ascensor/fondo-historias.png');
+    background-size: 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.footer-logos-container {
+    display: flex !important;
+    justify-content: center;
+    position: absolute;
+    bottom: -150px; /* Positioned in the black area below the background image */
+    width: 100%;
+    z-index: 20;
 }
 
 .footer-logos {
     width: 20%;
-    /* Relative width for small screens */
     max-width: 350px;
-    /* Fixed max width to prevent overlap on large screens */
     height: auto;
-    display: inline-block;
 }
 
-.floor-display {
+.base-content-wrapper {
     position: absolute;
-    top: 2075px;
-    /* Manually adjusted to align with blue background */
-    /* Align with top of screen image */
+    top: calc(50% - 220px);
+    /* Positioned centrally over the background mockup */
     left: 50%;
-    transform: translateX(-50%);
-    /* Center horizontally */
-    width: 14%;
-    /* Match screen width */
-    max-width: 272px;
-    aspect-ratio: 272 / 187;
-    /* Match aspect ratio of screen image */
-    z-index: 5;
-    color: #fff;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.5vw;
-    font-weight: bold;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 0, 255, 0.5);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 0, 255, 0.5);
-    pointer-events: none;
-}
-
-/* Footer Styles */
-.main-footer {
-    background-color: #000;
-    text-align: center;
-    padding: 50px 20px;
-    /* Add some breathing room */
-    position: relative;
-    z-index: 20;
-}
-
-.footer-logos {
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-}
-
-.floor-display-content {
-    overflow: hidden;
-    /* Mask the text outside the box */
-    display: flex;
-    align-items: center;
-    /* Center text vertically */
-    justify-content: center;
-    /* Center text horizontally */
-}
-
-.control-panel {
-    position: absolute;
-    right: 2%;
-    /* Move slightly right to clear the wood */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6.5vw;
-    height: 18vw; /* Default height for 6 buttons */
-    z-index: 20;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: height 0.3s ease;
-}
-
-/* Modifier for 9 buttons in Amazon Col */
-.control-panel.nine-floors {
-    height: 22vw;
-}
-
-/* Modifier for 10 buttons in Amazon MX */
-.control-panel.ten-floors {
-    height: 24vw;
-}
-
-/* Modifier for 11 buttons in Amazon MX */
-.control-panel.eleven-floors {
-    height: 29vw;
-}
-
-
-.panel-bg {
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: 100%; /* Stretch background vertically */
-    object-fit: fill; /* Force stretch */
-    display: block;
-}
-
-.panel-buttons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    /* Distribute buttons */
     align-items: center;
-    padding: 20% 0; /* Default padding for 6 buttons */
-}
-
-/* Modifier for 9 buttons spacing */
-.nine-floors .panel-buttons {
-    padding: 15% 0;
-}
-
-/* Modifier for 10 buttons spacing */
-.ten-floors .panel-buttons {
-    padding: 12% 0;
-}
-
-/* Modifier for 11 buttons spacing */
-.eleven-floors .panel-buttons {
-    padding: 14% 0;
-}
-
-.elevator-btn {
-    width: 1.5vw; /* Slightly smaller to fit more in the vertical space */
-    height: 1.5vw;
-    border-radius: 50%;
-    background-color: #333;
-    /* Dark gray */
-    color: #fff;
-    border: none;
-    font-weight: bold;
-    font-size: 0.9vw;
-    /* Responsive font size */
-    cursor: pointer;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    transition: background 0.3s;
+    z-index: 30;
 }
 
-.elevator-btn:hover {
-    background-color: #555;
-}
-
-.elevator-btn.active {
-    border: 1px solid #007bff;
-    /* Thinner border */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.base-text-overlay {
+    position: relative;
+    width: 55%;
+    max-width: 650px;
+    margin: 0 auto;
+    display: block !important;
 }
 
 .video-section {
     position: relative;
-    /* Anchor for control panel */
     width: 100%;
     margin: 0;
     line-height: 0;
-    /* Remove potential gap due to inline-block/text alignment */
     min-height: 100vh;
-    /* Ensure container has height since children are absolute */
 }
 
-/* Updated to support multiple stacked videos */
 .floor-video {
     position: absolute;
     top: 0;
@@ -401,9 +249,206 @@ body {
     z-index: 2;
 }
 
-.full-video {
-    /* Legacy class, can keep or remove. Keeping for safety if used elsewhere */
+.video-controls {
+    position: absolute;
+    bottom: -180px;
+    /* Matches original requested vertical offset */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-section:hover .video-controls {
+    opacity: 1;
+}
+
+.video-progress-container {
+    position: absolute;
+    bottom: -90px; /* Positioned above the playback controls */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    z-index: 35;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, height 0.2s ease;
+}
+
+.video-section:hover .video-progress-container {
+    opacity: 1;
+}
+
+.video-progress-container:hover {
+    height: 8px;
+}
+
+.video-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transition: width 0.1s linear;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    font-size: 20px;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.control-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* Control Panel / Elevator Buttons */
+.control-panel {
+    position: absolute;
+    right: 0.5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8.5vw;
+    height: 24vw;
+    z-index: 20;
+}
+
+.control-panel.nine-floors {
+    height: 34vw;
+}
+
+.control-panel.ten-floors {
+    height: 37vw;
+}
+
+.control-panel.eleven-floors {
+    height: 44vw;
+}
+
+.panel-bg {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: fill;
     display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.panel-buttons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20% 0;
+}
+
+.nine-floors .panel-buttons { padding: 15% 0; }
+.ten-floors .panel-buttons { padding: 12% 0; }
+.eleven-floors .panel-buttons { padding: 14% 0; }
+
+.elevator-btn {
+    width: 2.2vw;
+    height: 2.2vw;
+    border-radius: 50%;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s;
+    position: relative;
+}
+
+.elevator-btn:hover { background-color: #555; }
+
+.elevator-btn.active {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.elevator-btn::after {
+    content: attr(data-title);
+    position: absolute;
+    right: calc(100% + 15px);
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 1.1vw;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+}
+
+.elevator-btn:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.floor-display {
+    position: absolute;
+    top: 2075px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14%;
+    max-width: 272px;
+    aspect-ratio: 272 / 187;
+    z-index: 5;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5vw;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 0, 255, 0.5);
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .control-panel {
+        width: 15vw;
+        height: 45vw;
+    }
 }

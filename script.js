@@ -87,6 +87,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const buttons = document.querySelectorAll('.elevator-btn');
     const floorDisplay = document.getElementById('floor-display');
+    
+    // Track the currently active video to control it
+    let currentActiveVideo = videos[1];
+
+    // --- Video Controls Logic ---
+    const playBtn = document.getElementById('play-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const stopBtn = document.getElementById('stop-btn');
+
+    if (playBtn) {
+        playBtn.addEventListener('click', () => {
+            if (currentActiveVideo) currentActiveVideo.play();
+        });
+    }
+
+    if (pauseBtn) {
+        pauseBtn.addEventListener('click', () => {
+            if (currentActiveVideo) currentActiveVideo.pause();
+        });
+    }
+
+    if (stopBtn) {
+        stopBtn.addEventListener('click', () => {
+            if (currentActiveVideo) {
+                currentActiveVideo.pause();
+                currentActiveVideo.currentTime = 0;
+            }
+        });
+    }
+
+    // --- Progress Bar Logic ---
+    const progressBar = document.getElementById('video-progress-bar');
+    const progressContainer = document.querySelector('.video-progress-container');
+
+    function updateProgressBar() {
+        if (currentActiveVideo && currentActiveVideo.duration && progressBar) {
+            const percentage = (currentActiveVideo.currentTime / currentActiveVideo.duration) * 100;
+            progressBar.style.width = `${percentage}%`;
+        }
+    }
+
+    // Attach timeupdate to all videos in the floor list
+    Object.values(videos).forEach(video => {
+        if (video) {
+            video.addEventListener('timeupdate', updateProgressBar);
+        }
+    });
+
+    // Seek logic for clicking on progress bar
+    if (progressContainer) {
+        progressContainer.addEventListener('click', (e) => {
+            if (currentActiveVideo && currentActiveVideo.duration) {
+                const rect = progressContainer.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                currentActiveVideo.currentTime = pos * currentActiveVideo.duration;
+            }
+        });
+    }
 
     buttons.forEach(button => {
         button.addEventListener('click', () => {
@@ -98,32 +156,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 floorDisplay.textContent = `Piso ${floor}`;
             }
 
-            // If video element exists (some might be missing like floor 3)
+            // If video element exists
             if (clickedVideo) {
                 // Update active state on buttons immediately for UI feedback
                 buttons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
-                // Identify currently active video(s)
-                const previousActive = Object.values(videos).find(v => v && v.classList.contains('active') && v !== clickedVideo);
+                // Identify currently active video
+                const previousActive = currentActiveVideo;
+                
+                // Update modern active tracking
+                currentActiveVideo = clickedVideo;
 
                 // Start playing new video
                 clickedVideo.play().catch(e => console.error("Play error:", e));
 
                 // Bring new video to top and fade in
-                clickedVideo.style.zIndex = '10'; // Ensure it's on top during transition
+                clickedVideo.style.zIndex = '10'; 
                 clickedVideo.classList.add('active');
 
                 // After transition (matching CSS 0.5s), clean up old video
                 setTimeout(() => {
-                    if (previousActive) {
+                    if (previousActive && previousActive !== clickedVideo) {
                         previousActive.classList.remove('active');
                         previousActive.pause();
                         previousActive.currentTime = 0;
-                        previousActive.style.zIndex = ''; // Reset inline z-index
+                        previousActive.style.zIndex = '';
                     }
-                    clickedVideo.style.zIndex = ''; // Reset inline z-index (relies on CSS class now)
-                }, 500); // 500ms matches CSS transition time
+                    clickedVideo.style.zIndex = '';
+                }, 500); 
             } else {
                 console.warn(`No video found for floor ${floor}`);
             }

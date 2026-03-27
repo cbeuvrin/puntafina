@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    background: black;
+    overflow: hidden;
+}
+
+.selector-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('catalogo-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 40px 20px;
+}
+
+/* Add a subtle overlay for better text readability at the top if needed */
+.selector-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Softening the background */
+    z-index: 1;
+}
+
+.top-info {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 620px; /* Narrower to match the mockup's 3-line look */
+    margin-bottom: auto; /* Push content to bottom */
+    padding-top: 40px;
+}
+
+.top-info p {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    font-weight: 300;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+.selection-grid {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 12vw;
+    width: 60%; /* Tighter width to group buttons better */
+    margin: 0 auto;
+    padding-bottom: 12vh;
+}
+
+.selection-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selector-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.selector-link:hover {
+    transform: scale(1.05);
+}
+
+.selector-btn {
+    width: 22vw;
+    max-width: 450px;
+    height: auto;
+    display: block;
+}
+
+/* Adjustments for different screen sizes */
+@media (max-width: 768px) {
+    .selection-grid {
+        gap: 15vw;
+        padding-bottom: 20vh;
+    }
+    .selector-btn {
+        width: 35vw;
+    }
+    .top-info p {
+        font-size: 1rem;
+    }
+    .territory-label {
+        font-size: 1.1rem;
+    }
+}

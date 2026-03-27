@@ -40,66 +40,75 @@
         <!-- Second Video -->
         <section class="video-section">
             <!-- Preloaded Videos for Amazon Col -->
-            <video id="video-1" class="floor-video active" autoplay loop playsinline preload="metadata">
+            <video id="video-1" class="floor-video active" autoplay loop playsinline preload="auto">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/VIDEO-PITCH-Roxana-RAUL.mp4" type="video/mp4">
             </video>
-            <video id="video-2" class="floor-video" loop playsinline>
+            <video id="video-2" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/VIDEO-PITCH-La-Aeromoza-del-Presidente-RAUL.mp4" type="video/mp4">
             </video>
-            <video id="video-3" class="floor-video" loop playsinline>
+            <video id="video-3" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/7-VIDEO-PITCH-TU-MEJOR-ERROR-Ascensor.mp4" type="video/mp4">
             </video>
-            <video id="video-4" class="floor-video" loop playsinline>
+            <video id="video-4" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/3-VIDEO-PITCH-DIARIO-DE-UN-CANALLA-Ascensor.mp4" type="video/mp4">
             </video>
-            <video id="video-5" class="floor-video" loop playsinline>
+            <video id="video-5" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/8-VIDEO-PITCH-VOLVERTE-A-VER-Ascensor.mp4" type="video/mp4">
             </video>
-            <video id="video-6" class="floor-video" loop playsinline>
+            <video id="video-6" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/6-VIDEO-PITCH-SENUELO-Ascensor.mp4" type="video/mp4">
             </video>
-            <video id="video-7" class="floor-video" loop playsinline>
+            <video id="video-7" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/11-VIDEO-PITCH-GUERRA-VERDE-Ascensor.mp4" type="video/mp4">
             </video>
-            <video id="video-8" class="floor-video" loop playsinline>
+            <video id="video-8" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/12-VIDEO-PITCH-SIN-MATERIAL-PARA-PROTAGONISTA-Ascensor.mp4" type="video/mp4">
             </video>
-            <video id="video-9" class="floor-video" loop playsinline>
+            <video id="video-9" class="floor-video" loop playsinline preload="none">
                 <source src="https://storyvisual.puntafinastudios.com/wp-content/uploads/2026/03/13-VIDEO-PITCH-LO-QUE-VIENE-DESPUES-DEL-AMOR-Ascensor.mp4" type="video/mp4">
             </video>
+
+            <!-- Video Progress Bar -->
+            <div class="video-progress-container">
+                <div id="video-progress-bar" class="video-progress-bar"></div>
+            </div>
+
+            <!-- Video Controls -->
+            <div class="video-controls">
+                <button id="play-btn" class="control-btn" title="Reproducir">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button id="pause-btn" class="control-btn" title="Pausar">
+                    <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+                <button id="stop-btn" class="control-btn" title="Detener">
+                    <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+                </button>
+            </div>
 
             <!-- Control Panel -->
             <div class="control-panel nine-floors">
                 <img src="Videos/botonera fondo.webp" alt="Control Panel Background" class="panel-bg">
                 <div class="panel-buttons">
-                    <button class="elevator-btn" data-floor="9">9</button>
-                    <button class="elevator-btn" data-floor="8">8</button>
-                    <button class="elevator-btn" data-floor="7">7</button>
-                    <button class="elevator-btn" data-floor="6">6</button>
-                    <button class="elevator-btn" data-floor="5">5</button>
-                    <button class="elevator-btn" data-floor="4">4</button>
-                    <button class="elevator-btn" data-floor="3">3</button>
-                    <button class="elevator-btn" data-floor="2">2</button>
-                    <button class="elevator-btn active" data-floor="1">1</button>
+                    <button class="elevator-btn" data-floor="9" data-title="Lo que viene después del Amor">9</button>
+                    <button class="elevator-btn" data-floor="8" data-title="Sin Material para Protagonista">8</button>
+                    <button class="elevator-btn" data-floor="7" data-title="Guerra Verde">7</button>
+                    <button class="elevator-btn" data-floor="6" data-title="Señuelo">6</button>
+                    <button class="elevator-btn" data-floor="5" data-title="Volverte a ver">5</button>
+                    <button class="elevator-btn" data-floor="4" data-title="Diario de un Canalla">4</button>
+                    <button class="elevator-btn" data-floor="3" data-title="Tu Mejor Error">3</button>
+                    <button class="elevator-btn" data-floor="2" data-title="La Aeromoza del Presidente">2</button>
+                    <button class="elevator-btn active" data-floor="1" data-title="Roxana">1</button>
                 </div>
             </div>
         </section>
 
         <!-- Use a dedicated section for the base image to avoid overlap -->
         <section class="base-section">
-            <img src="ascensor/glass-inferior-base.png" alt="Elevator Base" class="elevator-base-img">
-
             <div class="base-content-wrapper">
-                <a href="https://storyvisual.puntafinastudios.com/amazon_col/" target="_blank" rel="noopener noreferrer">
-                    <img src="ascensor/texto-haz-click.png" alt="Haz click aquí" class="base-text-overlay">
+                <a href="catalogo.html">
+                    <img src="ascensor/nuevo-haz-click.png" alt="Haz click aquí" class="base-text-overlay">
                 </a>
-                <!-- Final Video Section -->
-                <div class="video-container">
-                    <video controls width="100%" height="100%" preload="metadata">
-                        <source src="VIDEO%20PARTE%20FINAL%20DEL%20ASCENSOR/PFS_VideoNoteOfIntention_RPyRC_ONLINE%20110326%20H264.mp4#t=0.001" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
             </div>
             <div class="footer-logos-container">
                 <img src="ascensor/logos-pf-storyvisual-base.png" alt="Logos Footer" class="footer-logos">
