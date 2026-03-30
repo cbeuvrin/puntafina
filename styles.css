@@ -225,6 +225,13 @@ body {
     display: block !important;
 }
 
+.amazon-mx-page .base-text-overlay,
+.amazon-col-page .base-text-overlay {
+    width: 80%;
+    max-width: 1040px; /* Reduced by 20% from 1300px */
+    margin-top: 200px; /* Lowered by 200px total */
+}
+
 .video-section {
     position: relative;
     width: 100%;
