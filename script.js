@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', handleScrollAnimation);
-    handleScrollAnimation(); // Initial check    // Select all video elements or Vimeo containers
-    const rawElements = {
+    handleScrollAnimation(); // Initial check    // Select all video elements
+    const videos = {
         1: document.getElementById('video-1'),
         2: document.getElementById('video-2'),
         3: document.getElementById('video-3'),
@@ -82,88 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         10: document.getElementById('video-10'),
         11: document.getElementById('video-11')
     };
-
-    const videos = {};
-    const progressBar = document.getElementById('video-progress-bar');
-    const progressContainer = document.querySelector('.video-progress-container');
-
-    // --- Unified Video Wrapper ---
-    class VideoWrapper {
-        constructor(el, id) {
-            this.el = el;
-            this.id = id;
-            this.isVimeo = el && el.tagName !== 'VIDEO';
-            this.vimeoPlayer = null;
-            this.nativeVideo = this.isVimeo ? null : el;
-
-            if (this.isVimeo && typeof Vimeo !== 'undefined') {
-                const vId = el.getAttribute('data-vimeo-id');
-                this.vimeoPlayer = new Vimeo.Player(el, {
-                    id: vId,
-                    autoplay: false,
-                    controls: false,
-                    responsive: true,
-                    muted: false
-                });
-
-                // Progress for Vimeo
-                this.vimeoPlayer.on('timeupdate', (data) => {
-                    if (this === currentActiveVideo && progressBar) {
-                        const percentage = (data.seconds / data.duration) * 100;
-                        progressBar.style.width = `${percentage}%`;
-                    }
-                });
-            } else if (this.nativeVideo) {
-                // Progress for Native
-                this.nativeVideo.addEventListener('timeupdate', () => {
-                    if (this === currentActiveVideo && progressBar && this.nativeVideo.duration) {
-                        const percentage = (this.nativeVideo.currentTime / this.nativeVideo.duration) * 100;
-                        progressBar.style.width = `${percentage}%`;
-                    }
-                });
-            }
-        }
-
-        play() {
-            if (this.isVimeo) return this.vimeoPlayer.play().catch(e => console.error("Vimeo Play Error:", e));
-            return this.nativeVideo.play().catch(e => console.error("Native Play Error:", e));
-        }
-
-        pause() {
-            if (this.isVimeo) return this.vimeoPlayer.pause();
-            return this.nativeVideo.pause();
-        }
-
-        stop() {
-            if (this.isVimeo) {
-                this.vimeoPlayer.pause();
-                this.vimeoPlayer.setCurrentTime(0);
-            } else if (this.nativeVideo) {
-                this.nativeVideo.pause();
-                this.nativeVideo.currentTime = 0;
-            }
-        }
-
-        seek(pos) {
-            if (this.isVimeo) {
-                this.vimeoPlayer.getDuration().then(duration => {
-                    this.vimeoPlayer.setCurrentTime(pos * duration);
-                });
-            } else if (this.nativeVideo && this.nativeVideo.duration) {
-                this.nativeVideo.currentTime = pos * this.nativeVideo.duration;
-            }
-        }
-
-        get style() { return this.el.style; }
-        get classList() { return this.el.classList; }
-    }
-
-    // Initialize wrappers
-    Object.keys(rawElements).forEach(key => {
-        if (rawElements[key]) {
-            videos[key] = new VideoWrapper(rawElements[key], key);
-        }
-    });
 
     const buttons = document.querySelectorAll('.elevator-btn');
     const floorDisplay = document.getElementById('floor-display');
@@ -190,17 +108,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (stopBtn) {
         stopBtn.addEventListener('click', () => {
-            if (currentActiveVideo) currentActiveVideo.stop();
+            if (currentActiveVideo) {
+                currentActiveVideo.pause();
+                currentActiveVideo.currentTime = 0;
+            }
         });
     }
+
+    // --- Progress Bar Logic ---
+    const progressBar = document.getElementById('video-progress-bar');
+    const progressContainer = document.querySelector('.video-progress-container');
+
+    function updateProgressBar() {
+        if (currentActiveVideo && currentActiveVideo.duration && progressBar) {
+            const percentage = (currentActiveVideo.currentTime / currentActiveVideo.duration) * 100;
+            progressBar.style.width = `${percentage}%`;
+        }
+    }
+
+    // Attach timeupdate to all videos in the floor list
+    Object.values(videos).forEach(video => {
+        if (video) {
+            video.addEventListener('timeupdate', updateProgressBar);
+        }
+    });
 
     // Seek logic for clicking on progress bar
     if (progressContainer) {
         progressContainer.addEventListener('click', (e) => {
-            if (currentActiveVideo) {
+            if (currentActiveVideo && currentActiveVideo.duration) {
                 const rect = progressContainer.getBoundingClientRect();
                 const pos = (e.clientX - rect.left) / rect.width;
-                currentActiveVideo.seek(pos);
+                currentActiveVideo.currentTime = pos * currentActiveVideo.duration;
             }
         });
     }
