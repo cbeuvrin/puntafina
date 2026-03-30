@@ -146,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    let topZIndex = 10;
+
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const floor = button.getAttribute('data-floor');
@@ -171,21 +173,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Start playing new video
                 clickedVideo.play().catch(e => console.error("Play error:", e));
 
-                // Bring new video to top and fade in
-                clickedVideo.style.zIndex = '10'; 
+                // Always bring the NEWEST click to the absolute top using an incrementing counter
+                topZIndex++;
+                clickedVideo.style.zIndex = topZIndex; 
                 clickedVideo.classList.add('active');
 
                 // After transition (matching CSS 0.5s), clean up old video
                 setTimeout(() => {
-                    // Only pause the old video if it is NO LONGER the currently active video
+                    // Only pause and hide the old video if it's not the one we just clicked again
                     if (previousActive && previousActive !== currentActiveVideo) {
                         previousActive.classList.remove('active');
                         previousActive.pause();
                         previousActive.currentTime = 0;
+                        // Important: reset z-index so it doesn't interfere with future ones
                         previousActive.style.zIndex = '';
-                    }
-                    if (clickedVideo === currentActiveVideo) {
-                        clickedVideo.style.zIndex = '';
                     }
                 }, 500); 
             } else {
