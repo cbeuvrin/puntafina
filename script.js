@@ -187,13 +187,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // After transition (matching CSS 0.5s), clean up old video
                 setTimeout(() => {
-                    if (previousActive && previousActive !== clickedVideo) {
+                    // Only pause the old video if it is NO LONGER the currently active video
+                    if (previousActive && previousActive !== currentActiveVideo) {
                         previousActive.classList.remove('active');
                         previousActive.pause();
                         previousActive.currentTime = 0;
                         previousActive.style.zIndex = '';
                     }
-                    clickedVideo.style.zIndex = '';
+                    if (clickedVideo === currentActiveVideo) {
+                        clickedVideo.style.zIndex = '';
+                    }
                 }, 500); 
             } else {
                 console.warn(`No video found for floor ${floor}`);
