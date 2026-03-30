@@ -147,16 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     buttons.forEach(button => {
-        // Preload on hover optimization
-        button.addEventListener('mouseenter', () => {
-             const floor = button.getAttribute('data-floor');
-             const hoverVideo = videos[floor];
-             // If video exists and preload is metadata or none, start downloading
-             if (hoverVideo && hoverVideo.preload !== 'auto') {
-                 hoverVideo.preload = 'auto';
-             }
-        });
-
         button.addEventListener('click', () => {
             const floor = button.getAttribute('data-floor');
             const clickedVideo = videos[floor];
