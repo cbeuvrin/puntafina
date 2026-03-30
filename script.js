@@ -232,6 +232,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Update modern active tracking
                 currentActiveVideo = clickedVideo;
 
+                // Stop the previous audio/video INSTANTLY before the transition starts
+                if (previousActive && previousActive !== currentActiveVideo) {
+                    previousActive.pause(); 
+                }
+
                 // Start playing new video
                 clickedVideo.play();
 
@@ -242,10 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // After transition (matching CSS 0.5s), clean up old video
                 setTimeout(() => {
-                    // Only pause and hide the old video if it's not the one we just clicked again
+                    // Only hide the old video if it's not the one we just clicked again
                     if (previousActive && previousActive !== currentActiveVideo) {
                         previousActive.classList.remove('active');
-                        previousActive.stop();
+                        previousActive.stop(); // This ensures it's paused AND reset to 0
                         // Important: reset z-index so it doesn't interfere with future ones
                         previousActive.style.zIndex = '';
                     }
