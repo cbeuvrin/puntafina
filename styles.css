@@ -251,6 +251,15 @@ body {
     z-index: 1;
 }
 
+div.floor-video {
+    height: 100%;
+}
+
+.floor-video iframe {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .floor-video.active {
     opacity: 1;
     z-index: 2;
