@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', handleScrollAnimation);
-    handleScrollAnimation(); // Initial check    // Select all video elements or Vimeo containers
-    const rawElements = {
+    handleScrollAnimation(); // Initial check    // Select all video container elements
+    const videoContainers = {
         1: document.getElementById('video-1'),
         2: document.getElementById('video-2'),
         3: document.getElementById('video-3'),
@@ -83,96 +83,38 @@ document.addEventListener('DOMContentLoaded', () => {
         11: document.getElementById('video-11')
     };
 
-    const videos = {};
-    const progressBar = document.getElementById('video-progress-bar');
-    const progressContainer = document.querySelector('.video-progress-container');
-
-    // --- Unified Video Wrapper ---
-    class VideoWrapper {
-        constructor(el, id) {
-            this.el = el;
-            this.id = id;
-            this.isVimeo = el && el.tagName !== 'VIDEO';
-            this.vimeoPlayer = null;
-            this.nativeVideo = this.isVimeo ? null : el;
-
-            if (this.isVimeo && typeof Vimeo !== 'undefined') {
-                const vId = el.getAttribute('data-vimeo-id');
-                this.vimeoPlayer = new Vimeo.Player(el, {
-                    id: vId,
-                    autoplay: false,
-                    controls: false,
-                    responsive: true,
-                    muted: false
-                });
-
-                // Progress for Vimeo
-                this.vimeoPlayer.on('timeupdate', (data) => {
-                    if (this === currentActiveVideo && progressBar) {
-                        const percentage = (data.seconds / data.duration) * 100;
-                        progressBar.style.width = `${percentage}%`;
-                    }
-                });
-            } else if (this.nativeVideo) {
-                // Progress for Native
-                this.nativeVideo.addEventListener('timeupdate', () => {
-                    if (this === currentActiveVideo && progressBar && this.nativeVideo.duration) {
-                        const percentage = (this.nativeVideo.currentTime / this.nativeVideo.duration) * 100;
-                        progressBar.style.width = `${percentage}%`;
-                    }
-                });
-            }
-        }
-
-        play() {
-            if (this.isVimeo) {
-                // Optimized: Removed reset-to-zero to prevent extra buffering delay
-                return this.vimeoPlayer.play().catch(e => console.error("Vimeo Play Error:", e));
-            }
-            return this.nativeVideo.play().catch(e => console.error("Native Play Error:", e));
-        }
-
-        pause() {
-            if (this.isVimeo) return this.vimeoPlayer.pause();
-            return this.nativeVideo.pause();
-        }
-
-        stop() {
-            if (this.isVimeo) {
-                this.vimeoPlayer.pause();
-                this.vimeoPlayer.setCurrentTime(0);
-            } else if (this.nativeVideo) {
-                this.nativeVideo.pause();
-                this.nativeVideo.currentTime = 0;
-            }
-        }
-
-        seek(pos) {
-            if (this.isVimeo) {
-                this.vimeoPlayer.getDuration().then(duration => {
-                    this.vimeoPlayer.setCurrentTime(pos * duration);
-                });
-            } else if (this.nativeVideo && this.nativeVideo.duration) {
-                this.nativeVideo.currentTime = pos * this.nativeVideo.duration;
-            }
-        }
-
-        get style() { return this.el.style; }
-        get classList() { return this.el.classList; }
-    }
-
-    // Initialize wrappers
-    Object.keys(rawElements).forEach(key => {
-        if (rawElements[key]) {
-            videos[key] = new VideoWrapper(rawElements[key], key);
-        }
-    });
-
+    const players = {};
     const buttons = document.querySelectorAll('.elevator-btn');
     const floorDisplay = document.getElementById('floor-display');
     
-    // Track the currently active video to control it
-    let currentActiveVideo = videos[1];
+    // Track the currently active video container and player
+    let currentActiveContainer = videoContainers[1];
+    let currentActivePlayer = null;
+
+    // Initialize Vimeo Players
+    Object.keys(videoContainers).forEach(floor => {
+        const container = videoContainers[floor];
+        if (container) {
+            const iframe = container.querySelector('iframe');
+            if (iframe) {
+                const player = new Vimeo.Player(iframe);
+                players[floor] = player;
+
+                // Set up timeupdate for progress bar
+                player.on('timeupdate', (data) => {
+                    if (container === currentActiveContainer && progressBar) {
+                        const percentage = data.percent * 100;
+                        progressBar.style.width = `${percentage}%`;
+                    }
+                });
+
+                // If it's the initial video, set as current player
+                if (floor == "1") {
+                    currentActivePlayer = player;
+                }
+            }
+        }
+    });
 
     // --- Video Controls Logic ---
     const playBtn = document.getElementById('play-btn');
@@ -181,29 +123,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (playBtn) {
         playBtn.addEventListener('click', () => {
-            if (currentActiveVideo) currentActiveVideo.play();
+            if (currentActivePlayer) currentActivePlayer.play();
         });
     }
 
     if (pauseBtn) {
         pauseBtn.addEventListener('click', () => {
-            if (currentActiveVideo) currentActiveVideo.pause();
+            if (currentActivePlayer) currentActivePlayer.pause();
         });
     }
 
     if (stopBtn) {
         stopBtn.addEventListener('click', () => {
-            if (currentActiveVideo) currentActiveVideo.stop();
+            if (currentActivePlayer) {
+                currentActivePlayer.pause();
+                currentActivePlayer.setCurrentTime(0);
+            }
         });
     }
+
+    // --- Progress Bar Logic ---
+    const progressBar = document.getElementById('video-progress-bar');
+    const progressContainer = document.querySelector('.video-progress-container');
 
     // Seek logic for clicking on progress bar
     if (progressContainer) {
         progressContainer.addEventListener('click', (e) => {
-            if (currentActiveVideo) {
-                const rect = progressContainer.getBoundingClientRect();
-                const pos = (e.clientX - rect.left) / rect.width;
-                currentActiveVideo.seek(pos);
+            if (currentActivePlayer) {
+                currentActivePlayer.getDuration().then(duration => {
+                    const rect = progressContainer.getBoundingClientRect();
+                    const pos = (e.clientX - rect.left) / rect.width;
+                    currentActivePlayer.setCurrentTime(pos * duration);
+                });
             }
         });
     }
@@ -213,46 +164,47 @@ document.addEventListener('DOMContentLoaded', () => {
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const floor = button.getAttribute('data-floor');
-            const clickedVideo = videos[floor];
+            const clickedContainer = videoContainers[floor];
+            const clickedPlayer = players[floor];
 
             // Update display text
             if (floorDisplay) {
                 floorDisplay.textContent = `Piso ${floor}`;
             }
 
-            // If video element exists
-            if (clickedVideo) {
+            // If container and player exist
+            if (clickedContainer && clickedPlayer) {
                 // Update active state on buttons immediately for UI feedback
                 buttons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
                 // Identify currently active video
-                const previousActive = currentActiveVideo;
+                const previousContainer = currentActiveContainer;
+                const previousPlayer = currentActivePlayer;
                 
-                // Update modern active tracking
-                currentActiveVideo = clickedVideo;
-
-                // Stop the previous audio/video INSTANTLY before the transition starts
-                if (previousActive && previousActive !== currentActiveVideo) {
-                    previousActive.pause(); 
-                }
+                // Update tracking
+                currentActiveContainer = clickedContainer;
+                currentActivePlayer = clickedPlayer;
 
                 // Start playing new video
-                clickedVideo.play();
+                clickedPlayer.play().catch(e => console.error("Play error:", e));
 
                 // Always bring the NEWEST click to the absolute top using an incrementing counter
                 topZIndex++;
-                clickedVideo.style.zIndex = topZIndex; 
-                clickedVideo.classList.add('active');
+                clickedContainer.style.zIndex = topZIndex; 
+                clickedContainer.classList.add('active');
 
                 // After transition (matching CSS 0.5s), clean up old video
                 setTimeout(() => {
-                    // Only hide the old video if it's not the one we just clicked again
-                    if (previousActive && previousActive !== currentActiveVideo) {
-                        previousActive.classList.remove('active');
-                        previousActive.stop(); // This ensures it's paused AND reset to 0
+                    // Only pause and hide the old video if it's not the one we just clicked again
+                    if (previousContainer && previousContainer !== currentActiveContainer) {
+                        previousContainer.classList.remove('active');
+                        if (previousPlayer) {
+                            previousPlayer.pause();
+                            previousPlayer.setCurrentTime(0);
+                        }
                         // Important: reset z-index so it doesn't interfere with future ones
-                        previousActive.style.zIndex = '';
+                        previousContainer.style.zIndex = '';
                     }
                 }, 500); 
             } else {
