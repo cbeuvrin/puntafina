@@ -249,6 +249,7 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 1;
+    overflow: hidden;
 }
 
 div.floor-video {
@@ -261,6 +262,8 @@ div.floor-video {
     height: 100% !important;
     border: none;
     pointer-events: none;
+    transform: scale(1.18);
+    transform-origin: top center;
 }
 
 .floor-video.active {
