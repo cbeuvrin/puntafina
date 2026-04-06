@@ -91,23 +91,30 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentActiveContainer = videoContainers[1];
     let currentActivePlayer = null;
 
-    // Initialize Vimeo Players
+    // Helper function to initialize player
+    function initPlayer(floor, iframe, container) {
+        const player = new Vimeo.Player(iframe);
+        players[floor] = player;
+
+        // Set up timeupdate for progress bar
+        player.on('timeupdate', (data) => {
+            if (container === currentActiveContainer && progressBar) {
+                const percentage = data.percent * 100;
+                progressBar.style.width = `${percentage}%`;
+            }
+        });
+        
+        return player;
+    }
+
+    // Initialize ONLY pre-loaded Vimeo Players (usually just Floor 1)
     Object.keys(videoContainers).forEach(floor => {
         const container = videoContainers[floor];
         if (container) {
             const iframe = container.querySelector('iframe');
-            if (iframe) {
-                const player = new Vimeo.Player(iframe);
-                players[floor] = player;
-
-                // Set up timeupdate for progress bar
-                player.on('timeupdate', (data) => {
-                    if (container === currentActiveContainer && progressBar) {
-                        const percentage = data.percent * 100;
-                        progressBar.style.width = `${percentage}%`;
-                    }
-                });
-
+            // Only initialize if src exists (not lazy loaded)
+            if (iframe && iframe.getAttribute('src')) {
+                const player = initPlayer(floor, iframe, container);
                 // If it's the initial video, set as current player
                 if (floor == "1") {
                     currentActivePlayer = player;
@@ -165,17 +172,26 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const floor = button.getAttribute('data-floor');
             const clickedContainer = videoContainers[floor];
-            const clickedPlayer = players[floor];
+            let clickedPlayer = players[floor];
 
             // Update display text
             if (floorDisplay) {
                 floorDisplay.textContent = `Piso ${floor}`;
             }
 
-            // If container and player exist
-            if (clickedContainer && clickedPlayer) {
-                // Update active state on buttons immediately for UI feedback
-                buttons.forEach(btn => btn.classList.remove('active'));
+            // If container exists
+            if (clickedContainer) {
+                const iframe = clickedContainer.querySelector('iframe');
+                
+                // LAZY LOAD: If player doesn't exist yet, inject the src and initialize!
+                if (!clickedPlayer && iframe && iframe.getAttribute('data-src')) {
+                    iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                    clickedPlayer = initPlayer(floor, iframe, clickedContainer);
+                }
+
+                if (clickedPlayer) {
+                    // Update active state on buttons immediately for UI feedback
+                    buttons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
                 // Identify currently active video
@@ -207,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         previousContainer.style.zIndex = '';
                     }
                 }, 500); 
+                } // End if (clickedPlayer)
             } else {
                 console.warn(`No video found for floor ${floor}`);
             }
